@@ -1,65 +1,33 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-// Screens
+import { store } from './src/store';
 import HomeScreen from './src/screens/HomeScreen';
 import WalletScreen from './src/screens/WalletScreen';
 import SendScreen from './src/screens/SendScreen';
 import ReceiveScreen from './src/screens/ReceiveScreen';
+import SwapScreen from './src/screens/SwapScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
-import SecurityScreen from './src/screens/SecurityScreen';
 
-// Components
-import TabBarIcon from './src/components/TabBarIcon';
+const Stack = createNativeStackNavigator();
 
-const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
-const queryClient = new QueryClient();
-
-function TabNavigator() {
+const App = () => {
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => (
-          <TabBarIcon route={route} focused={focused} color={color} size={size} />
-        ),
-        tabBarActiveTintColor: '#007AFF',
-        tabBarInactiveTintColor: 'gray',
-        headerShown: false,
-      })}
-    >
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Wallet" component={WalletScreen} />
-      <Tab.Screen name="Send" component={SendScreen} />
-      <Tab.Screen name="Receive" component={ReceiveScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
-    </Tab.Navigator>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Wallet" component={WalletScreen} />
+          <Stack.Screen name="Send" component={SendScreen} />
+          <Stack.Screen name="Receive" component={ReceiveScreen} />
+          <Stack.Screen name="Swap" component={SwapScreen} />
+          <Stack.Screen name="Settings" component={SettingsScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
-}
+};
 
-export default function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <SafeAreaProvider>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen 
-              name="Main" 
-              component={TabNavigator} 
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen 
-              name="Security" 
-              component={SecurityScreen}
-              options={{ title: 'Security Settings' }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </SafeAreaProvider>
-    </QueryClientProvider>
-  );
-}
+export default App;

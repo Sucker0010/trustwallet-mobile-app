@@ -1,17 +1,14 @@
-import { randomBytes } from 'crypto';
-import * as bip39 from 'bip39';
 import { ethers } from 'ethers';
+import { randomBytes } from 'crypto';
+import bip39 from 'bip39';
 
-// Generate a new wallet
-export const createWallet = async () => {
+export const generateWallet = async () => {
   const mnemonic = bip39.generateMnemonic();
-  const seed = await bip39.mnemonicToSeed(mnemonic);
   const wallet = ethers.Wallet.fromMnemonic(mnemonic);
-  return { mnemonic, seed: seed.toString('hex'), wallet };
+  return { mnemonic, address: wallet.address };
 };
 
-// Import existing wallet
-export const importWallet = (mnemonic: string) => {
+export const importWallet = async (mnemonic: string) => {
   const wallet = ethers.Wallet.fromMnemonic(mnemonic);
-  return wallet;
+  return { address: wallet.address };
 };

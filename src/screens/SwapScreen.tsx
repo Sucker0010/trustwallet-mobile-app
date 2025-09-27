@@ -1,31 +1,8 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+# Trust Wallet Clone
 
-const SwapScreen: React.FC = () => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Swap</Text>
-      <Text style={styles.subtitle}>Feature coming soon...</Text>
-    </View>
-  );
-};
+## Overview
+This is a cryptocurrency wallet application built using React Native. It supports wallet creation, currency transactions, and token swapping through decentralized exchanges.
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#666',
-  },
-});
+## Installation
 
-export default SwapScreen;
+1. Clone the repository.

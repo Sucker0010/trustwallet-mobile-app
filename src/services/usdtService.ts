@@ -1,20 +1,16 @@
-import { ethers } from 'ethers';
+import axios from 'axios';
 
-const PROVIDERS = {
-  ETH: new ethers.providers.InfuraProvider('mainnet', 'YOUR_INFURA_PROJECT_ID'),
-  BSC: new ethers.providers.JsonRpcProvider('https://bsc-dataseed.binance.org/'),
-  TRON: new ethers.providers.JsonRpcProvider('https://api.trongrid.io')
-};
+const ETH_USDT_ADDRESS = '0xdac17f958d2ee523a2206206994597c13d831ec7'; // USDT Contract address on Ethereum
+const BSC_USDT_ADDRESS = '0xdac17f958d2ee523a2206206994597c13d831ec7'; // USDT Contract address on BSC
 
-// Function to get USDT balance
-export const getTokenBalance = async (walletAddress: string, chain: string) => {
-  const provider = PROVIDERS[chain];
-  const tokenContract = new ethers.Contract(
-    'USDT_CONTRACT_ADDRESS', 
-    ['function balanceOf(address owner) view returns (uint256)'], 
-    provider
-  );
-  
-  const balance = await tokenContract.balanceOf(walletAddress);
-  return ethers.utils.formatUnits(balance, 6); // USDT has 6 decimals
+export const getUSDTBalance = async (address: string, chain: 'ETH' | 'BSC') => {
+  let url = '';
+  if (chain === 'ETH') {
+    url = `https://api.etherscan.io/api?module=account&action=balance&address=${address}&tag=latest&apikey=YOUR_ETHERSCAN_API_KEY`;
+  } else if (chain === 'BSC') {
+    url = `https://api.bscscan.com/api?module=account&action=balance&address=${address}&tag=latest&apikey=YOUR_BSCSCAN_API_KEY`;
+  }
+
+  const response = await axios.get(url);
+  return response.data.result;
 };
