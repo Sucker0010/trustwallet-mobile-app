@@ -1,46 +1,31 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { colors } from '../utils/colors';
+import { View, Text, StyleSheet } from 'react-native';
 
-export default function SettingsScreen({ navigation }) {
-    return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Settings</Text>
-            <TouchableOpacity 
-                style={styles.option}
-                onPress={() => navigation.navigate('Security')}
-            >
-                <Text style={styles.optionText}>Security</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.option}>
-                <Text style={styles.optionText}>Network Settings</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.option}>
-                <Text style={styles.optionText}>About</Text>
-            </TouchableOpacity>
-        </View>
-    );
-}
+const SettingsScreen: React.FC = () => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Settings</Text>
+      <Text style={styles.subtitle}>Feature coming soon...</Text>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-        backgroundColor: colors.background,
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 30,
-        color: colors.text,
-    },
-    option: {
-        paddingVertical: 15,
-        borderBottomWidth: 1,
-        borderBottomColor: colors.borderLight,
-    },
-    optionText: {
-        fontSize: 16,
-        color: colors.text,
-    },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#666',
+  },
 });
+
+export default SettingsScreen;

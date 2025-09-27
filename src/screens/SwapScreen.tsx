@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const ReceiveScreen: React.FC = () => {
+const SwapScreen: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Receive</Text>
+      <Text style={styles.title}>Swap</Text>
       <Text style={styles.subtitle}>Feature coming soon...</Text>
     </View>
   );
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ReceiveScreen;
+export default SwapScreen;
